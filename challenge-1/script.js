@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
       question.addEventListener("click", () => {
         const isActive = item.classList.contains("active");
         
-        // Close all open items
         faqItems.forEach((faq) => {
           faq.classList.remove("active");
           faq.querySelector(".icon").src = "./assets/images/icon-plus.svg";
