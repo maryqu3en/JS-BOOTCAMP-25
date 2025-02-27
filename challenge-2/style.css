@@ -29,18 +29,39 @@ body {
     align-items: center;
     margin: 0;
     padding: 20px;
+    overflow-y: hidden;
 }
 
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--text-color);
+
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    height: 88vh;
+    width: 100vw;
+    padding: 20px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 8px;
 }
 
 canvas {
     border: 1px solid var(--border-color);
     background-color: var(--cell-dead-color);
+    border-radius: 8px;
     margin-bottom: 15px;
+    flex-grow: 1;
 }
 
 button {
@@ -52,6 +73,8 @@ button {
     cursor: pointer;
     border-radius: 6px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 100%;
+    max-width: 100%;
 }
 
 button:hover {
@@ -65,4 +88,48 @@ button:active {
 button:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--focus-shadow-color);
+}
+
+#speedSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: #8e94a7; 
+    border-radius: 5px;
+    outline: none;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#speedSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #9440f3;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#speedSlider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #9440f3;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#speedSlider:hover {
+    background: #736c8a;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+label {
+    align-self: center;
 }

@@ -11,17 +11,21 @@
 <body>
     <h1>Conway's Game of Life</h1>
     
-    <canvas id="gridCanvas"></canvas>
-    
-    <div class="controls">
-        <button id="startBtn">Start/Stop</button>
-        <button id="clearBtn">Clear</button>
-        <button id="randomBtn">Random</button>
-        <button id="gliderGunBtn">Glider Gun</button>
-        <button id="pulsarBtn">Pulsar</button>
-        <button id="pentaDecathlonBtn">PentaDecathlon</button>
-        <button ><a href="README.md" target="_blank">Code documentation</a></button>
-    </div>
+    <main class="container">
+        <div class="controls">
+            <button id="startBtn">Start</button>
+            <button id="clearBtn">Clear</button>
+            <button id="randomBtn">Random</button>
+            <button id="gliderGunBtn">Glider Gun</button>
+            <button id="pulsarBtn">Pulsar</button>
+            <button id="pentaDecathlonBtn">PentaDecathlon</button>
+            <button ><a href="README.md" target="_blank">Code documentation</a></button>
+            <label for="speedSlider">Speed</label>
+            <input type="range" id="speedSlider" min="1" max="500" value="50">
+        </div>
+
+        <canvas id="gridCanvas"></canvas>
+    </main>
 
     <script src="script.js"></script>
 </body>

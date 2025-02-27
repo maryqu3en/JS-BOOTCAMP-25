@@ -30,18 +30,50 @@ class Game {
             [14, 9], [15, 9]
         ]
 
+        const offsetX = Math.floor(this.cols / 2) - 7;
+        const offsetY = Math.floor(this.rows / 2) - 7;
+
         metrix.forEach(([x, y]) => {
-            this.grid[y][x] = true;
+            this.grid[y + offsetY][x + offsetX] = true;
         });
     }
 
     drawPulsar() {
-
+        const pulsarPattern = [
+            [2, 4], [2, 5], [2, 6], [2, 10], [2, 11], [2, 12],
+            [7, 4], [7, 5], [7, 6], [7, 10], [7, 11], [7, 12],
+            [9, 4], [9, 5], [9, 6], [9, 10], [9, 11], [9, 12],
+            [14, 4], [14, 5], [14, 6], [14, 10], [14, 11], [14, 12],
+    
+            [4, 2], [5, 2], [6, 2], [10, 2], [11, 2], [12, 2],
+            [4, 7], [5, 7], [6, 7], [10, 7], [11, 7], [12, 7],
+            [4, 9], [5, 9], [6, 9], [10, 9], [11, 9], [12, 9],
+            [4, 14], [5, 14], [6, 14], [10, 14], [11, 14], [12, 14]
+        ];
+    
+        const offsetX = Math.floor(this.cols / 2) - 7;
+        const offsetY = Math.floor(this.rows / 2) - 7;
+    
+        pulsarPattern.forEach(([x, y]) => {
+            this.grid[y + offsetY][x + offsetX] = true;
+        });
     }
+    
 
     drawPentaDecathlon() {
-
-    }
+        const pentadecathlonPattern = [
+            [3, 0], [8, 0],
+            [1, 1], [2, 1], [4, 1], [5, 1], [6, 1], [7, 1], [9, 1], [10, 1],
+            [3, 2], [8, 2]
+        ];
+    
+        const offsetX = Math.floor(this.cols / 2) - 5;
+        const offsetY = Math.floor(this.rows / 2) - 1;
+    
+        pentadecathlonPattern.forEach(([x, y]) => {
+            this.grid[y + offsetY][x + offsetX] = true;
+        });
+    }    
 
     countNeighbors(x, y) {
         let count = 0;
@@ -98,10 +130,23 @@ class Renderer {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const game = new Game(124, 280, 5);
+    const game = new Game(130, 250, 5);
     const canvas = document.getElementById('gridCanvas');
     const renderer = new Renderer(canvas, game);
     let intervalId = null;
+    let speed = 100;
+
+    document.getElementById('speedSlider').addEventListener('input', (event) => {
+        speed = parseInt(event.target.value);
+        if (game.isRunning) {
+            clearInterval(intervalId);
+            intervalId = setInterval(() => {
+                game.update();
+                renderer.draw();
+            }, speed);
+        }
+    });
+    
 
     document.getElementById('startBtn').addEventListener('click', () => {
         game.isRunning = !game.isRunning;
@@ -111,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             intervalId = setInterval(() => {
                 game.update();
                 renderer.draw();
-            }, 1);
+            }, speed);
         } else {
             clearInterval(intervalId);
         }
@@ -123,25 +168,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('randomBtn').addEventListener('click', () => {
+        game.grid = game.createEmptyGrid();
         game.randomize();
         renderer.draw();
     });
 
     document.getElementById('gliderGunBtn').addEventListener('click', () => {
+        game.grid = game.createEmptyGrid();
         game.drawGliderGun();
         renderer.draw();
     });
 
     document.getElementById('pulsarBtn').addEventListener('click', () => {
+        game.grid = game.createEmptyGrid();
         game.drawPulsar();
         renderer.draw();
     });
 
     document.getElementById('pentaDecathlonBtn').addEventListener('click', () => {
-        game.drawGosperGliderGun();
+        game.grid = game.createEmptyGrid();
+        game.drawPentaDecathlon();
         renderer.draw();
     });
 
-    // Initial Draw
     renderer.draw();
 });
